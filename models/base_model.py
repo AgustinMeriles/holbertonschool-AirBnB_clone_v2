@@ -4,6 +4,7 @@ import uuid
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
@@ -59,4 +60,5 @@ class BaseModel:
 
     def delete(self):
         """Deletes an instance of a user"""
+        from models import storage
         storage.delete(self)
