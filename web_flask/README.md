@@ -1,0 +1,1 @@
+This Directory will implements Flask web application
