@@ -22,15 +22,17 @@ def c(text):
     return "C " + t
 
 
+@app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def python(text):
+def py(text="is cool"):
     text = text.replace("_", " ")
     return "Python" + " " + text
 
 
+@app.route('/number/', strict_slashes=False)
 @app.route('/number/<n>', strict_slashes=False)
 def number(n):
-    if isinstance(n, int):
+    if isinstance(n, int) == True:
         return n + " is a number"
 
 if __name__ == '__main__':
