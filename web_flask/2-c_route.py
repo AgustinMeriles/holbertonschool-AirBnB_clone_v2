@@ -18,8 +18,8 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def c(t):
-    t = t.replace("_", " ")
-    return "C" + " " + t
+    txt = t.replace('_', ' ')
+    return f"C {txt}"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
