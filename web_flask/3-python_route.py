@@ -17,14 +17,14 @@ def hbnb():
 
 
 @app.route('/c/<text>', strict_slashes=False)
-def c(t):
-    txt = t.replace('_', ' ')
-    return f"C {txt}"
+def c(text):
+    t = text.replace("_", " ")
+    return "C " + t
 
 
 @app.route('/python/<text>', strict_slashes=False)
-def py(t):
-    txt = t.replace('_', ' ')
+def py(text):
+    txt = text.replace('_', ' ')
     return f"Python {txt}"
 
 if __name__ == '__main__':
