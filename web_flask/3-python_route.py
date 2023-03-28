@@ -24,8 +24,8 @@ def c(text):
 
 @app.route('/python/<text>', strict_slashes=False)
 def py(text):
-    txt = text.replace('_', ' ')
-    return f"Python {txt}"
+    txt = text.replace("_", " ")
+    return "Python " + txt
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
