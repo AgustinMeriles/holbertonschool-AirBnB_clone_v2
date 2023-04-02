@@ -1,38 +1,25 @@
 #!/usr/bin/python3
-""" Shebang """
-
-from flask import Flask
-from flask import render_template
+"""Starts a Flask web application"""
+from flask import Flask, render_template
 from models import storage
 from models.state import State
-from os import getenv
 
 app = Flask(__name__)
-
-
-@app.route("/states", strict_slashes=False)
-def show_states():
-    """ displays a HTML page with list of all State """
-    return render_template('9-states.html', state=storage.all(State))
-
-
-@app.route("/states/<id>", strict_slashes=False)
-def show_cities(id):
-    """ displays a HTML page with list of all cities of a State"""
-    for st in storage.all(State).values():
-        if st.id == id:
-            return render_template('9-states.html', state=st)
-    return render_template('9-states.html')
+app.url_map.strict_slashes = False
 
 
 @app.teardown_appcontext
-def closing(dummy):
-    """closes alchemy session"""
-
-    from models import storage
-
+def teardown_db(exception):
+    """Removes the current SQLAlchemy Session"""
     storage.close()
 
 
+@app.route('/cities_by_states')
+def display_cities_by_states():
+    """Displays a HTML page with a list of all State objects and their City objects"""
+    states = sorted(storage.all(State).values(), key=lambda state: state.name)
+    return render_template('8-cities_by_states.html', states=states)
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port='5000')
